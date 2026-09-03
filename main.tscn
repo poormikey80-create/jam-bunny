@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8hvq2yrn4mbk"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_player"]
+[ext_resource type="Script" path="res://carrot_spawner.gd" id="2_spawner"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bunny"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bunny"]
+size = Vector2(12, 14)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_floor"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("2_spawner")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 160)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(160, 120)
+script = ExtResource("1_player")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = SubResource("PlaceholderTexture2D_bunny")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_bunny")
+
+[node name="Carrots" type="Node2D" parent="."]
+
+[node name="Score" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 27.0
+text = "0"
